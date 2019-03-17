@@ -8,5 +8,10 @@ namespace Memberships.Controllers
         {
             throw new System.NotImplementedException();
         }
+
+        public ActionResult Edit(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
