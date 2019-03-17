@@ -56,6 +56,7 @@ namespace Memberships.Areas.Admin.Controllers
             return View(section);
         }
 
+
         // GET: Admin/Section/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
