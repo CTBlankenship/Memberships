@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Memberships.Entities;
 using Memberships.Models;
@@ -112,7 +108,7 @@ namespace Memberships.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             ProductType productType = await db.ProductTypes.FindAsync(id);
-            db.ProductTypes.Remove(productType);
+            db.ProductTypes.Remove(productType ?? throw new InvalidOperationException());
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
