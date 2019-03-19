@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Memberships.Areas.Admin.Models;
 using Memberships.Entities;
 using Memberships.Models;
-using System.Data.Entity;
 
 namespace Memberships.Areas.Admin.Extensions
 {
@@ -24,7 +21,8 @@ namespace Memberships.Areas.Admin.Extensions
                 select new ProductModel
                 {
                     Id = p.Id,
-                    Title = p.Description,
+                    Title = p.Title,
+                    Description = p.Description,
                     ImageUrl = p.ImageUrl,
                     ProductLinkTextId = p.ProductLinkTextId,
                     ProductTypeId = p.ProductTypeId,

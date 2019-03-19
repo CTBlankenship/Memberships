@@ -51,7 +51,7 @@ namespace Memberships.Areas.Admin.Models
                 {
                     return ProductLinkTexts == null || ProductLinkTexts.Count.Equals(0)
                         ? String.Empty
-                        : ProductLinkTexts.First(pt => pt.Id.Equals(ProductTypeId)).Title;
+                        : ProductLinkTexts.First(pt => pt.Id.Equals(ProductLinkTextId)).Title;
                 }
             }
 

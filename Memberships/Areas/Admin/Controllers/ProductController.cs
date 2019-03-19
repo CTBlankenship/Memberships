@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Memberships.Areas.Admin.Extensions;
+using Memberships.Areas.Admin.Models;
 using Memberships.Entities;
 using Memberships.Models;
 
@@ -21,8 +18,8 @@ namespace Memberships.Areas.Admin.Controllers
         public async Task<ActionResult> Index()
         {
             var products = await db.Products.ToListAsync();
-            var model = products.Convert(db);
-            return View(model.Result);
+            var model = await products.Convert(db);
+            return View(model);
         }
 
         // GET: Admin/Product/Details/5
@@ -41,9 +38,14 @@ namespace Memberships.Areas.Admin.Controllers
         }
 
         // GET: Admin/Product/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new ProductModel
+            {
+                ProductLinkTexts = await db.ProductLinkTexts.ToListAsync(),
+                ProductTypes = await db.ProductTypes.ToListAsync()
+            };
+            return View(model);
         }
 
         // POST: Admin/Product/Create
@@ -115,7 +117,7 @@ namespace Memberships.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Product product = await db.Products.FindAsync(id);
-            db.Products.Remove(product);
+            db.Products.Remove(product ?? throw new InvalidOperationException());
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
