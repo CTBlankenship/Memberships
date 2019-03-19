@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
@@ -77,7 +79,12 @@ namespace Memberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+
+            var prod = new List<Product>();
+            prod.Add(product);
+            var ProductModel = await prod.Convert(db);
+
+            return View(ProductModel.First());
         }
 
         // POST: Admin/Product/Edit/5
